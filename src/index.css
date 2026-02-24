@@ -9,7 +9,12 @@
     scroll-behavior: smooth;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading tracking-tight;
   }
 }
@@ -30,12 +35,39 @@
   .clip-reveal {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   }
-  
+
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .hide-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  .browser-frame {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .iframe-active iframe {
+    pointer-events: auto !important;
+  }
+}
+
+/* Scroll hint bounce */
+@keyframes gentle-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(-50%);
+  }
+
+  50% {
+    transform: translateY(4px) translateX(-50%);
+  }
+}
+
+.scroll-hint-icon div {
+  animation: gentle-bounce 1.8s ease-in-out infinite;
 }

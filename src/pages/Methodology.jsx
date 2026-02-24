@@ -29,7 +29,7 @@ export default function Methodology() {
             ScrollTrigger.create({
                 trigger: layeredPinRef.current,
                 start: 'top top+=100px',
-                end: `+=${cards.length * 80}vh`,
+                end: `+=${cards.length * 150}vh`,
                 pin: true,
                 pinSpacing: true,
             });
@@ -46,9 +46,9 @@ export default function Methodology() {
                         ease: 'none',
                         scrollTrigger: {
                             trigger: layeredPinRef.current,
-                            start: `+=${(i - 1) * 80}vh`,
-                            end: `+=${80}vh`,
-                            scrub: true,
+                            start: `+=${(i - 1) * 150}vh`,
+                            end: `+=${150}vh`,
+                            scrub: 1,
                         }
                     }
                 );
@@ -125,7 +125,7 @@ export default function Methodology() {
                         <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter">
                             A.I. First Executie
                         </h2>
-                        <p className="font-data text-volt mt-4">THE ENGINE OF TOMORROW</p>
+                        <p className="font-data text-volt mt-4">DE MOTOR VAN MORGEN</p>
                     </div>
 
                     <div className="relative w-full max-w-4xl mx-auto h-[60vh] md:h-[60vh]">
@@ -182,9 +182,9 @@ export default function Methodology() {
                         <div className="bg-matte p-12 rounded-fluid-lg border border-volt/20 text-center relative overflow-hidden">
                             <div className="absolute inset-0 bg-volt/5 blur-3xl rounded-full"></div>
                             <div className="relative z-10">
-                                <div className="font-data text-ash/50 text-sm mb-4">Doorlooptijd Reductie</div>
+                                <div className="font-data text-ash/50 text-sm mb-4">Verkorte Doorlooptijd</div>
                                 <div className="text-8xl md:text-[8rem] font-bold text-volt tracking-tighter tabular-nums leading-none">
-                                    <span className="animate-counter" data-start="12" data-end="2">12</span><span className="text-4xl text-ash/40">WK</span>
+                                    <span className="animate-counter" data-start="12" data-end="2">12</span><span className="text-4xl text-ash/40">WEKEN</span>
                                 </div>
                                 <div className="mt-6 font-data tracking-widest text-sm uppercase text-volt/80">
                                     Van Maanden naar Weken

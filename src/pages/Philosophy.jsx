@@ -89,8 +89,8 @@ export default function Philosophy() {
 
                     <div className="relative z-20 w-48 h-48 md:w-64 md:h-64 rounded-full border border-volt/30 flex items-center justify-center p-8 backdrop-blur-sm bg-carbon/40">
                         <div className="w-full h-full rounded-full border border-volt/50 flex flex-col items-center justify-center animate-pulse shadow-[0_0_30px_rgba(223,255,0,0.2)]">
-                            <span className="font-data text-volt tracking-widest text-xs mb-2">SYSTEM</span>
-                            <span className="font-heading font-bold text-3xl">ONLINE</span>
+                            <span className="font-data text-volt tracking-widest text-xs mb-2">SYSTEEM</span>
+                            <span className="font-heading font-bold text-3xl">GEREED</span>
                         </div>
                     </div>
                 </div>

@@ -4,17 +4,17 @@ import gsap from 'gsap';
 
 const steps = [
     { id: 'start', question: 'Klaar om iets prachtigs te bouwen?', type: 'info', action: 'START PROTOCOL' },
-    { id: 'vision', question: 'Wat is je visie?', prefix: 'VISION >', type: 'input', placeholder: 'Sleutelwoorden, doelen, identiteit...' },
-    { id: 'timeline', question: 'Wat is je tijdlijn?', prefix: 'TIMELINE >', type: 'input', placeholder: 'Binnen 2 weken, een maand, ASAP...' },
+    { id: 'vision', question: 'Wat is je visie?', prefix: 'VISIE >', type: 'input', placeholder: 'Sleutelwoorden, doelen, identiteit...' },
+    { id: 'timeline', question: 'Wat is je tijdlijn?', prefix: 'TIJDLIJN >', type: 'input', placeholder: 'Binnen 2 weken, een maand, direct...' },
     { id: 'contact', question: 'Hoe kunnen we je bereiken?', prefix: 'CONTACT >', type: 'input', placeholder: 'E-mail, telefoonnummer, of bedrijfsnaam...' },
-    { id: 'finish', question: 'Gegevens ontvangen. System override succesvol.', type: 'terminal', action: 'RETURN TO BASE' }
+    { id: 'finish', question: 'Gegevens ontvangen. Systeem override succesvol.', type: 'terminal', action: 'TERUG NAAR BASIS' }
 ];
 
 export default function Contact() {
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
     const [answers, setAnswers] = useState({ vision: '', timeline: '', contact: '' });
     const [inputValue, setInputValue] = useState('');
-    const [logs, setLogs] = useState(['INIT SOCRATES_PROTOCOL v1.0.0', 'ESTABLISHING SECURE CONNECTION...', '[OK] CONNECTED']);
+    const [logs, setLogs] = useState(['INIT SOCRATES_PROTOCOL v1.0.0', 'BEZIG MET HET OPZETTEN VAN EEN VEILIGE VERBINDING...', '[OK] VERBONDEN']);
 
     const inputRef = useRef(null);
     const terminalRef = useRef(null);
@@ -41,10 +41,10 @@ export default function Contact() {
         if (currentStep.type === 'input') {
             if (!inputValue.trim()) return;
             setAnswers(prev => ({ ...prev, [currentStep.id]: inputValue }));
-            setLogs(prev => [...prev, `${currentStep.prefix} ${inputValue}`, '[OK] DATA LOGGED']);
+            setLogs(prev => [...prev, `${currentStep.prefix} ${inputValue}`, '[OK] GEGEVENS GEREGISTREERD']);
             setInputValue('');
         } else if (currentStep.type === 'info') {
-            setLogs(prev => [...prev, 'PROTOCOL INITIATED / AWAITING USER INPUT']);
+            setLogs(prev => [...prev, 'PROTOCOL GEÏNITIEERD / WACHTEN OP GEBRUIKERSINVOER']);
         } else if (currentStep.type === 'terminal') {
             // Simulate form submission
             navigate('/');
@@ -70,7 +70,7 @@ export default function Contact() {
                 <div className="flex justify-between items-center border-b border-volt/20 pb-4 mb-12">
                     <div className="font-data text-volt tracking-widest text-xs uppercase flex items-center gap-3">
                         <span className="w-2 h-2 bg-volt animate-pulse"></span>
-                        Terminal_Access_Granted
+                        Toegang_Verleend
                     </div>
                     <div className="text-ash/40 font-data text-xs hidden md:block">
                         {new Date().toISOString()} CPU: 12% RAM: 450MB
@@ -118,7 +118,7 @@ export default function Contact() {
                                 <div className="w-12 h-12 border border-volt/30 group-hover:bg-volt group-hover:text-matte rounded-full flex items-center justify-center transition-all duration-300">
                                     <span className="font-data tracking-tighter">→</span>
                                 </div>
-                                <span>{currentStep.action || 'CONFIRM ->'}</span>
+                                <span>{currentStep.action || 'BEVESTIG ->'}</span>
                             </button>
                         )}
 

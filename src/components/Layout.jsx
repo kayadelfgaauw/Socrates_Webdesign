@@ -40,7 +40,7 @@ export default function Layout({ children }) {
                 <button
                     className="md:hidden text-volt z-50 relative p-2"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    aria-label="Toggle menu"
+                    aria-label="Menu omschakelen"
                 >
                     {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
@@ -71,10 +71,10 @@ export default function Layout({ children }) {
             {/* Footer */}
             <footer className="border-t border-ash/10 py-8 px-6 md:px-12 relative z-10 mt-auto bg-carbon">
                 <div className="flex flex-col md:flex-row justify-between items-center text-xs font-data text-ash/50">
-                    <p>&copy; {new Date().getFullYear()} Socrates Webdesign. All systems nominal.</p>
+                    <p>&copy; {new Date().getFullYear()} Socrates Webdesign. Alle systemen operationeel.</p>
                     <div className="flex gap-4 mt-4 md:mt-0">
-                        <span>SYS_READY</span>
-                        <span className="text-volt">IDLE: NO</span>
+                        <span>SYSTEEM_GEREED</span>
+                        <span className="text-volt">IDLE: NEE</span>
                     </div>
                 </div>
             </footer>
