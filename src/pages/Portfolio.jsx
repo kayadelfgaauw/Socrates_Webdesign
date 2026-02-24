@@ -59,7 +59,6 @@ export default function Portfolio() {
                         name={item.name}
                         type={item.type}
                         year={item.year}
-                        pinOnScroll={true}
                     />
                 ))}
             </div>

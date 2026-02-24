@@ -140,7 +140,6 @@ export default function Home() {
                             name={project.name}
                             speed={project.speed}
                             stack={project.stack}
-                            pinOnScroll={true}
                         />
                     ))}
                 </div>
