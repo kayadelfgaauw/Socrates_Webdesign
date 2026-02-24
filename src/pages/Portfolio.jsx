@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import TextReveal from '../components/TextReveal';
 import MagneticButton from '../components/MagneticButton';
 import LivePreviewContainer from '../components/LivePreviewContainer';
@@ -30,6 +31,11 @@ const portfolioItems = [
 export default function Portfolio() {
     return (
         <div className="w-full pt-32 pb-24 px-6 md:px-12 bg-carbon">
+            <Helmet>
+                <title>Portfolio | Socrates Webdesign - Onze Projecten</title>
+                <meta name="description" content="Bekijk onze paddock van high-end webdesign projecten. Van e-commerce tot interactieve platformen, Socrates Webdesign levert resultaat." />
+                <link rel="canonical" href="https://socrates-webdesign.nl/portfolio" />
+            </Helmet>
             {/* Hero Header */}
             <div className="max-w-6xl mx-auto mb-24">
                 <div className="flex items-center gap-4 mb-6 font-data text-volt tracking-widest text-xs">

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import TextReveal from '../components/TextReveal';
 import MagneticButton from '../components/MagneticButton';
 import LivePreviewContainer from '../components/LivePreviewContainer';
@@ -52,6 +53,11 @@ export default function Home() {
 
     return (
         <div className="w-full">
+            <Helmet>
+                <title>Socrates Webdesign | High-End Webdesign & AI Ontwikkeling</title>
+                <meta name="description" content="Dé partner voor cinemastische websites en AI-gedreven webontwikkeling. Wij bouwen razendsnelle, performante digitale ervaringen die indruk maken." />
+                <link rel="canonical" href="https://socrates-webdesign.nl/" />
+            </Helmet>
             {/* S1: Hero - De Windtunnel */}
             <section className="hero-section relative h-[100svh] w-full overflow-hidden flex flex-col items-center justify-center pt-24 pb-12 px-6">
                 <div

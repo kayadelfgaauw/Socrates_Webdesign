@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TextReveal from '../components/TextReveal';
@@ -32,6 +33,11 @@ export default function Philosophy() {
 
     return (
         <div ref={containerRef} className="w-full bg-carbon min-h-screen pt-24">
+            <Helmet>
+                <title>Onze Filosofie | Socrates Webdesign - Mens + Machine</title>
+                <meta name="description" content="Socrates Webdesign gelooft in de symbiose tussen menselijke intuïtie en technologische efficiëntie. Lees meer over onze visie op de toekomst van het internet." />
+                <link rel="canonical" href="https://socrates-webdesign.nl/over" />
+            </Helmet>
 
             <section className="split-section flex flex-col md:flex-row min-h-[90vh] relative border-t border-ash/10">
 

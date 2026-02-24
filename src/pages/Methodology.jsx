@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TextReveal from '../components/TextReveal';
@@ -80,6 +81,11 @@ export default function Methodology() {
 
     return (
         <div ref={containerRef} className="w-full bg-carbon min-h-screen">
+            <Helmet>
+                <title>Onze Formule | Socrates Webdesign - AI-Gedreven Methode</title>
+                <meta name="description" content="Ontdek hoe Socrates Webdesign AI gebruikt om razendsnel cinematische websites te bouwen. Onze unieke aanpak combineert menselijke creativiteit met technologische kracht." />
+                <link rel="canonical" href="https://socrates-webdesign.nl/formule" />
+            </Helmet>
 
             {/* Hero */}
             <section className="pt-32 pb-24 px-6 md:px-12 border-b border-ash/10">

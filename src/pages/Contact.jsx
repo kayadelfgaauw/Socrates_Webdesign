@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 
@@ -63,6 +64,11 @@ export default function Contact() {
 
     return (
         <div className="w-full min-h-screen bg-matte flex flex-col pt-24 pb-12 px-6 overflow-hidden">
+            <Helmet>
+                <title>Contact | Socrates Webdesign - Start je Project</title>
+                <meta name="description" content="Klaar om de grid op te gaan? Start het Socrates protocol en vertel ons over je visie. Wij bouwen de website van de toekomst voor je." />
+                <link rel="canonical" href="https://socrates-webdesign.nl/contact" />
+            </Helmet>
 
             {/* Terminal View */}
             <div className="max-w-4xl mx-auto w-full flex flex-col flex-grow relative z-10">
