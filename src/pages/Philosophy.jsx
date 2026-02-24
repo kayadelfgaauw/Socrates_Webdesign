@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -8,6 +8,18 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Philosophy() {
     const containerRef = useRef(null);
+
+    // Generate stable random matrix data using state initializer (safe from render purity rules)
+    const [matrixData] = useState(() => {
+        return Array.from({ length: 20 }).map(() => ({
+            marginTop: `${Math.random() * -100}%`,
+            opacity: 0.1 + Math.random() * 0.4,
+            chars: Array.from({ length: 40 }).map(() => ({
+                isSocrates: Math.random() > 0.8,
+                randomStr: Math.random().toString(36).substring(2, 8)
+            }))
+        }));
+    });
 
     useEffect(() => {
         let ctx = gsap.context(() => {
@@ -73,20 +85,20 @@ export default function Philosophy() {
 
                     {/* Matrix Overlay */}
                     <div className="absolute inset-0 z-10 opacity-70 flex gap-2 md:gap-4 overflow-hidden mask-image-linear-gradient">
-                        {Array.from({ length: 20 }).map((_, i) => (
+                        {matrixData.map((col, i) => (
                             <div
                                 key={i}
-                                className="matrix-col font-data text-volt/50 text-xs md:text-sm tracking-widest writing-vertical uppercase h-[200%] mt-[random-mt]"
+                                className="matrix-col font-data text-volt/50 text-xs md:text-sm tracking-widest writing-vertical uppercase h-[200%]"
                                 style={{
                                     writingMode: 'vertical-rl',
                                     textOrientation: 'mixed',
-                                    marginTop: `${Math.random() * -100}%`,
-                                    opacity: 0.1 + Math.random() * 0.4
+                                    marginTop: col.marginTop,
+                                    opacity: col.opacity
                                 }}
                             >
-                                {Array.from({ length: 40 }).map((_, j) => (
+                                {col.chars.map((char, j) => (
                                     <span key={j} className="block my-2">
-                                        {Math.random() > 0.8 ? 'SOCRATES' : Math.random().toString(36).substring(2, 8)}
+                                        {char.isSocrates ? 'SOCRATES' : char.randomStr}
                                     </span>
                                 ))}
                             </div>

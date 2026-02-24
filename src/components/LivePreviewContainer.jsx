@@ -15,7 +15,6 @@ export default function LivePreviewContainer({
     name,
     type,
     year,
-    stack,
     speed,
     className = '',
 }) {

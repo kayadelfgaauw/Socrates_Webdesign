@@ -15,9 +15,9 @@ export default function Layout({ children }) {
     const location = useLocation();
 
     useEffect(() => {
-        setIsMenuOpen(false);
+        if (isMenuOpen) setIsMenuOpen(false);
         window.scrollTo(0, 0);
-    }, [location.pathname]);
+    }, [location.pathname, isMenuOpen]);
 
     return (
         <div className="min-h-screen flex flex-col relative overflow-hidden bg-carbon text-ash">

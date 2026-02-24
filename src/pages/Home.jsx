@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,12 @@ const projects = [
 ];
 
 export default function Home() {
+    // Generate stable random stream data using state initializer (safe from render purity rules)
+    const [streamData] = useState(() => {
+        return Array.from({ length: 150 }).map(() => ({
+            id: Math.random().toString(36).substring(2, 12)
+        }));
+    });
 
     useEffect(() => {
         let ctx = gsap.context(() => {
@@ -93,8 +99,8 @@ export default function Home() {
             <section className="machine-section relative py-32 md:py-48 px-6 border-t border-ash/10 overflow-hidden bg-carbon/50 backdrop-blur-sm">
                 <div className="absolute right-0 top-0 bottom-0 w-24 md:w-64 border-l border-ash/5 font-data text-[10px] md:text-xs leading-none text-ash/20 overflow-hidden opacity-30 select-none">
                     <div className="data-stream-content flex flex-col gap-1 p-2 md:p-4 break-all">
-                        {Array.from({ length: 150 }).map((_, i) => (
-                            <span key={i}>{Math.random().toString(36).substring(2, 12)} [OK]</span>
+                        {streamData.map((data, i) => (
+                            <span key={i}>{data.id} [OK]</span>
                         ))}
                     </div>
                 </div>

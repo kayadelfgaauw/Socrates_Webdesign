@@ -17,7 +17,6 @@ export default function Contact() {
     const [inputValue, setInputValue] = useState('');
     const [logs, setLogs] = useState(['INIT SOCRATES_PROTOCOL v1.0.0', 'BEZIG MET HET OPZETTEN VAN EEN VEILIGE VERBINDING...', '[OK] VERBONDEN']);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState('idle'); // idle, sending, success, error
 
     const inputRef = useRef(null);
     const terminalRef = useRef(null);
@@ -64,7 +63,6 @@ export default function Contact() {
 
     const handleSubmit = async () => {
         setIsSubmitting(true);
-        setSubmitStatus('sending');
         setLogs(prev => [...prev, '[PROCESS] DATA ENCRYPTIE GESTART...', '[PROCESS] VERBINDING MAKEN MET HOOFDKWARTIER...']);
 
         try {
@@ -85,7 +83,6 @@ export default function Contact() {
             const result = await response.json();
 
             if (result.success) {
-                setSubmitStatus('success');
                 setLogs(prev => [...prev, '[OK] VERBINDING STABIEL', '[OK] DATA VERZONDEN NAAR HEADQUARTERS', '[OK] OVERRIDE VOLTOOID']);
                 setCurrentStepIndex(steps.length - 1);
             } else {
@@ -93,7 +90,6 @@ export default function Contact() {
             }
         } catch (error) {
             console.error("Submission Error:", error);
-            setSubmitStatus('error');
             setLogs(prev => [...prev, '[FAIL] VERBINDING VERBROKEN', '[ERROR] SYSTEEMKRITISCHE FOUT BIJ VERZENDEN', 'PROBEER HET LATER OPNIEUW OF MAIL DIRECT naar info@socrates-webdesign.nl']);
         } finally {
             setIsSubmitting(false);
