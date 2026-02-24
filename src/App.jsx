@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/werk" element={<Portfolio />} />
           <Route path="/formule" element={<Methodology />} />
-          <Route path="/over" element={<Philosophy />} />
+          <Route path="/filosofie" element={<Philosophy />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>

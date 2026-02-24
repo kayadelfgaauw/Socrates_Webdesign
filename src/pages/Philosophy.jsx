@@ -36,7 +36,7 @@ export default function Philosophy() {
             <Helmet>
                 <title>Onze Filosofie | Socrates Webdesign - Mens + Machine</title>
                 <meta name="description" content="Socrates Webdesign gelooft in de symbiose tussen menselijke intuïtie en technologische efficiëntie. Lees meer over onze visie op de toekomst van het internet." />
-                <link rel="canonical" href="https://socrates-webdesign.nl/over" />
+                <link rel="canonical" href="https://socrates-webdesign.nl/filosofie" />
             </Helmet>
 
             <section className="split-section flex flex-col md:flex-row min-h-[90vh] relative border-t border-ash/10">
