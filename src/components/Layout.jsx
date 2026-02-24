@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Werk', path: '/portfolio' },
+    { name: 'Werk', path: '/werk' },
     { name: 'Formule', path: '/formule' },
     { name: 'Filosofie', path: '/over' },
     { name: 'Start Project', path: '/contact' }

@@ -34,7 +34,7 @@ export default function Portfolio() {
             <Helmet>
                 <title>Portfolio | Socrates Webdesign - Onze Projecten</title>
                 <meta name="description" content="Bekijk onze paddock van high-end webdesign projecten. Van e-commerce tot interactieve platformen, Socrates Webdesign levert resultaat." />
-                <link rel="canonical" href="https://socrates-webdesign.nl/portfolio" />
+                <link rel="canonical" href="https://socrates-webdesign.nl/werk" />
             </Helmet>
             {/* Hero Header */}
             <div className="max-w-6xl mx-auto mb-24">

@@ -152,7 +152,7 @@ export default function Home() {
 
                 {/* CTA */}
                 <div className="max-w-6xl mx-auto px-6 md:px-12 mt-24 flex justify-center">
-                    <MagneticButton as={Link} to="/portfolio">Bekijk Alle Projecten</MagneticButton>
+                    <MagneticButton as={Link} to="/werk">Bekijk Alle Projecten</MagneticButton>
                 </div>
             </section>
 
