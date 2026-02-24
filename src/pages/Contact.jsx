@@ -16,6 +16,8 @@ export default function Contact() {
     const [answers, setAnswers] = useState({ vision: '', timeline: '', contact: '' });
     const [inputValue, setInputValue] = useState('');
     const [logs, setLogs] = useState(['INIT SOCRATES_PROTOCOL v1.0.0', 'BEZIG MET HET OPZETTEN VAN EEN VEILIGE VERBINDING...', '[OK] VERBONDEN']);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState('idle'); // idle, sending, success, error
 
     const inputRef = useRef(null);
     const terminalRef = useRef(null);
@@ -38,7 +40,7 @@ export default function Contact() {
         }
     }, [currentStepIndex, logs]);
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if (currentStep.type === 'input') {
             if (!inputValue.trim()) return;
             setAnswers(prev => ({ ...prev, [currentStep.id]: inputValue }));
@@ -46,13 +48,56 @@ export default function Contact() {
             setInputValue('');
         } else if (currentStep.type === 'info') {
             setLogs(prev => [...prev, 'PROTOCOL GEÏNITIEERD / WACHTEN OP GEBRUIKERSINVOER']);
-        } else if (currentStep.type === 'terminal') {
-            // Simulate form submission
+        } else if (currentStep.id === 'finish') {
+            // Direct navigate back on the final step
             navigate('/');
             return;
         }
 
-        setCurrentStepIndex(prev => prev + 1);
+        // Final step trigger (before the "finish" terminal screen)
+        if (currentStepIndex === steps.length - 2) {
+            await handleSubmit();
+        } else {
+            setCurrentStepIndex(prev => prev + 1);
+        }
+    };
+
+    const handleSubmit = async () => {
+        setIsSubmitting(true);
+        setSubmitStatus('sending');
+        setLogs(prev => [...prev, '[PROCESS] DATA ENCRYPTIE GESTART...', '[PROCESS] VERBINDING MAKEN MET HOOFDKWARTIER...']);
+
+        try {
+            const response = await fetch(`https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_HASH || "x"}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    subject: `Nieuwe aanvraag van ${answers.contact}`,
+                    ...answers,
+                    // Ensure the last input is captured if necessary
+                    contact: answers.contact || inputValue
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                setSubmitStatus('success');
+                setLogs(prev => [...prev, '[OK] VERBINDING STABIEL', '[OK] DATA VERZONDEN NAAR HEADQUARTERS', '[OK] OVERRIDE VOLTOOID']);
+                setCurrentStepIndex(steps.length - 1);
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            console.error("Submission Error:", error);
+            setSubmitStatus('error');
+            setLogs(prev => [...prev, '[FAIL] VERBINDING VERBROKEN', '[ERROR] SYSTEEMKRITISCHE FOUT BIJ VERZENDEN', 'PROBEER HET LATER OPNIEUW OF MAIL DIRECT naar info@socrates-webdesign.nl']);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleKeyDown = (e) => {
@@ -116,15 +161,20 @@ export default function Contact() {
                             </div>
                         )}
 
-                        {(currentStep.type === 'info' || currentStep.type === 'terminal' || (currentStep.type === 'input' && inputValue.trim().length > 0)) && (
+                        {(currentStep.type === 'info' || currentStep.id === 'finish' || (currentStep.type === 'input' && inputValue.trim().length > 0)) && (
                             <button
                                 onClick={handleNext}
-                                className="mt-12 group flex items-center gap-4 text-volt font-data uppercase tracking-widest text-sm"
+                                disabled={isSubmitting}
+                                className={`mt-12 group flex items-center gap-4 text-volt font-data uppercase tracking-widest text-sm ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 <div className="w-12 h-12 border border-volt/30 group-hover:bg-volt group-hover:text-matte rounded-full flex items-center justify-center transition-all duration-300">
-                                    <span className="font-data tracking-tighter">→</span>
+                                    {isSubmitting ? (
+                                        <span className="animate-spin text-lg">◌</span>
+                                    ) : (
+                                        <span className="font-data tracking-tighter">→</span>
+                                    )}
                                 </div>
-                                <span>{currentStep.action || 'BEVESTIG ->'}</span>
+                                <span>{isSubmitting ? 'VERZENDEN...' : (currentStep.action || 'BEVESTIG ->')}</span>
                             </button>
                         )}
 
