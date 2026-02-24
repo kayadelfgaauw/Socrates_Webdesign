@@ -80,9 +80,7 @@ export default function Contact() {
                 })
             });
 
-            const result = await response.json();
-
-            if (result.success) {
+            if (response.ok) {
                 setLogs(prev => [...prev, '[OK] VERBINDING STABIEL', '[OK] DATA VERZONDEN NAAR HEADQUARTERS', '[OK] OVERRIDE VOLTOOID']);
                 setCurrentStepIndex(steps.length - 1);
             } else {
