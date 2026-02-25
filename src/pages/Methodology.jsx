@@ -24,34 +24,41 @@ export default function Methodology() {
                 }
             });
 
-            // Layered Cards Pinning
+            // Layered Cards Pinning & Animation
             const cards = gsap.utils.toArray('.layer-card');
 
-            ScrollTrigger.create({
-                trigger: layeredPinRef.current,
-                start: 'top top+=100px',
-                end: `+=${cards.length * 150}vh`,
-                pin: true,
-                pinSpacing: true,
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: layeredPinRef.current,
+                    start: 'top top',
+                    end: `+=${cards.length * 100}%`,
+                    pin: true,
+                    pinSpacing: true,
+                    scrub: 0.5,
+                }
             });
 
             cards.forEach((card, i) => {
-                if (i === 0) return; // First card is static
+                if (i === 0) return; // First card is already visible
 
-                gsap.fromTo(card,
-                    { yPercent: 120, scale: 0.9, opacity: 0 },
+                // Previous cards slightly scale down and dim as the next one comes in
+                tl.to(cards.slice(0, i), {
+                    scale: 0.95 - (i * 0.02),
+                    opacity: 0.4,
+                    duration: 1,
+                    ease: "power2.inOut"
+                }, i - 0.5);
+
+                // Current card slides up
+                tl.fromTo(card,
+                    { yPercent: 120, opacity: 0 },
                     {
                         yPercent: 0,
-                        scale: 1,
                         opacity: 1,
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: layeredPinRef.current,
-                            start: `+=${(i - 1) * 150}vh`,
-                            end: `+=${150}vh`,
-                            scrub: 1,
-                        }
-                    }
+                        duration: 1,
+                        ease: "power2.out"
+                    },
+                    i - 0.5
                 );
             });
 
@@ -137,21 +144,21 @@ export default function Methodology() {
                     <div className="relative w-full max-w-4xl mx-auto h-[60vh] md:h-[60vh]">
 
                         {/* Card 1 */}
-                        <div className="layer-card absolute inset-0 bg-carbon rounded-fluid border border-ash/10 p-8 md:p-16 flex flex-col justify-center shadow-xl z-10">
+                        <div className="layer-card absolute inset-0 bg-carbon rounded-fluid border border-ash/10 p-8 md:p-16 flex flex-col justify-center shadow-xl z-10 will-change-transform">
                             <div className="font-data text-volt mb-4">FASE 1: CONCEPT GENERATIE</div>
                             <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-6">Razend&shy;snel Concepten</h3>
                             <p className="font-drama text-xl text-ash/70 italic">Met behulp van geavanceerde LLM's zetten we ruwe ideeën onmiddellijk om in gedetailleerde wireframes en cinematische blauwdrukken. Wat vroeger weken duurde, gebeurt in uren.</p>
                         </div>
 
                         {/* Card 2 */}
-                        <div className="layer-card absolute inset-0 bg-[#0a0a0a] rounded-fluid border border-ash/20 p-8 md:p-16 flex flex-col justify-center shadow-2xl z-20 top-4 scale-[0.98]">
+                        <div className="layer-card absolute inset-0 bg-[#0a0a0a] rounded-fluid border border-ash/20 p-8 md:p-16 flex flex-col justify-center shadow-2xl z-20 will-change-transform opacity-0">
                             <div className="font-data text-volt mb-4">FASE 2: CODE SYNTHESE</div>
                             <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-6">Foutloze Code</h3>
                             <p className="font-drama text-xl text-ash/70 italic">Onze AI-assistenten schrijven boilerplate, complexe logica en animaties met onberispelijke precisie. De menselijke architect overziet het grote geheel, de machine bouwt de motor.</p>
                         </div>
 
                         {/* Card 3 */}
-                        <div className="layer-card absolute inset-0 bg-[#121212] rounded-fluid border border-volt/30 p-8 md:p-16 flex flex-col justify-center shadow-[0_-10px_40px_rgba(223,255,0,0.1)] z-30 top-8 scale-[0.96]">
+                        <div className="layer-card absolute inset-0 bg-[#121212] rounded-fluid border border-volt/30 p-8 md:p-16 flex flex-col justify-center shadow-[0_-10px_40px_rgba(223,255,0,0.1)] z-30 will-change-transform opacity-0">
                             <div className="font-data text-volt mb-4">FASE 3: PERFECTE BEELDEN</div>
                             <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-6">Visuals op Maat</h3>
                             <p className="font-drama text-xl text-ash/70 italic">Vergeet generieke stock foto's. We genereren hyper-realistische, esthetisch perfecte beelden die 100% aansluiten bij jouw merkidentiteit.</p>
