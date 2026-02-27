@@ -68,7 +68,7 @@ export default function Home() {
             <section className="hero-section relative h-[100svh] w-full overflow-hidden flex flex-col items-center justify-center pt-24 pb-12 px-6">
                 <div
                     className="hero-bg absolute inset-0 bg-cover bg-center opacity-[0.15] z-0 scale-110"
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1541415664-9d564ceb3aa1?q=80&w=2000&auto=format&fit=crop')" }}
+                    style={{ backgroundImage: "url('/images/Hero.webp')" }}
                 >
                     <div className="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-transparent"></div>
                 </div>
