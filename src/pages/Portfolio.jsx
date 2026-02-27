@@ -25,6 +25,13 @@ const portfolioItems = [
         type: 'Interactief Platform',
         year: '2025',
         url: 'https://opdreefmotoren.nl',
+    },
+    {
+        id: 4,
+        name: 'DQ Styling',
+        type: 'E-commerce',
+        year: '2026',
+        url: 'https://dqstyling.nl',
     }
 ];
 
