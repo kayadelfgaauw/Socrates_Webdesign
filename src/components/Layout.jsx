@@ -7,7 +7,7 @@ const navLinks = [
     { name: 'Werk', path: '/werk' },
     { name: 'Formule', path: '/formule' },
     { name: 'Filosofie', path: '/filosofie' },
-    { name: 'Start Project', path: '/contact' }
+    { name: 'Gratis proefdesign aanvragen', path: '/contact' }
 ];
 
 export default function Layout({ children }) {

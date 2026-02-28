@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,31 +9,33 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Philosophy() {
     const containerRef = useRef(null);
 
-    // Generate stable random matrix data using state initializer (safe from render purity rules)
-    const [matrixData] = useState(() => {
-        return Array.from({ length: 20 }).map(() => ({
-            marginTop: `${Math.random() * -100}%`,
-            opacity: 0.1 + Math.random() * 0.4,
-            chars: Array.from({ length: 40 }).map(() => ({
-                isSocrates: Math.random() > 0.8,
-                randomStr: Math.random().toString(36).substring(2, 8)
-            }))
-        }));
-    });
-
     useEffect(() => {
         let ctx = gsap.context(() => {
-            // Matrix Rain Effect (simplified CSS/GSAP sim)
-            const matrixColumns = document.querySelectorAll('.matrix-col');
-            matrixColumns.forEach((col) => {
-                gsap.to(col, {
-                    yPercent: -50,
+            // Parallax effect on images
+            gsap.utils.toArray('.parallax-img').forEach((img) => {
+                gsap.to(img, {
+                    yPercent: 15,
                     ease: "none",
                     scrollTrigger: {
-                        trigger: '.split-section',
+                        trigger: img.parentElement,
                         start: "top bottom",
                         end: "bottom top",
                         scrub: true
+                    }
+                });
+            });
+
+            // Fade in sections
+            gsap.utils.toArray('.fade-in-section').forEach((section) => {
+                gsap.from(section, {
+                    opacity: 0,
+                    y: 40,
+                    duration: 1.2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
                     }
                 });
             });
@@ -44,76 +46,117 @@ export default function Philosophy() {
     }, []);
 
     return (
-        <div ref={containerRef} className="w-full bg-carbon min-h-screen pt-24">
+        <div ref={containerRef} className="w-full bg-carbon min-h-screen pt-32 pb-32 selection:bg-volt selection:text-carbon relative overflow-hidden">
             <Helmet>
-                <title>Onze Filosofie | Socrates Webdesign - Mens + Machine</title>
-                <meta name="description" content="Socrates Webdesign gelooft in de symbiose tussen menselijke intuïtie en technologische efficiëntie. Lees meer over onze visie op de toekomst van het internet." />
+                <title>Filosofie | Socrates Webdesign</title>
+                <meta name="description" content="Van 100 uur gepruts naar de perfecte prompt. Lees het verhaal achter Socrates Webdesign." />
                 <link rel="canonical" href="https://socrates-webdesign.nl/filosofie" />
             </Helmet>
 
-            <section className="split-section flex flex-col md:flex-row min-h-[90vh] relative border-t border-ash/10">
+            {/* Background Texture/Gradient */}
+            <div className="absolute top-0 left-0 w-full h-[800px] bg-gradient-to-b from-volt/5 to-transparent pointer-events-none mix-blend-overlay"></div>
 
-                {/* Left Side: Story */}
-                <div className="w-full md:w-1/2 p-6 md:p-16 lg:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-ash/10 bg-matte/50 z-10 relative">
-                    <div className="font-data text-volt mb-8 uppercase tracking-widest text-sm">De Piloot</div>
-                    <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-12 mix-blend-difference">
-                        <TextReveal text="Socrates +" as="span" /> <br />
-                        <span className="text-volt"><TextReveal text="De Machine" delay={0.2} as="span" /></span>
+            <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+
+                {/* Intro Section */}
+                <section className="min-h-[70vh] flex flex-col justify-center mb-16 md:mb-32">
+                    <h1 className="text-5xl md:text-8xl font-heading font-bold uppercase tracking-tighter mb-8 mix-blend-difference leading-[1.1]">
+                        <TextReveal text="Van 100 uur" as="span" /> <br />
+                        <span className="text-volt"><TextReveal text="gepruts" delay={0.2} as="span" /></span> <br />
+                        <TextReveal text="Naar de perfecte prompt" delay={0.4} as="span" />
                     </h1>
+                </section>
 
-                    <div className="space-y-8 font-drama text-xl md:text-2xl italic text-ash/80 max-w-xl">
+                {/* Section 1 */}
+                <section className="flex flex-col md:flex-row gap-12 md:gap-24 mb-32 fade-in-section items-center group">
+                    <div className="w-full md:w-1/2 overflow-hidden rounded-2xl h-[400px] md:h-[600px] relative border border-ash/10">
+                        <img
+                            src="/images/Filosofie/Gemini_Generated_Image_acthe1acthe1acth.webp"
+                            alt="Abstract AI Visual 1"
+                            className="w-full h-[120%] object-cover absolute top-[-10%] parallax-img grayscale group-hover:grayscale-0 transition-all duration-700 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-carbon/20 group-hover:bg-transparent transition-all duration-700"></div>
+                    </div>
+                    <div className="w-full md:w-1/2 space-y-6 font-drama text-lg md:text-xl text-ash/80 leading-relaxed">
                         <p>
-                            <TextReveal text="Genoemd naar de grondlegger van kritische vragen, geloven wij dat de beste antwoorden beginnen bij de juiste inzichten. Wij bevragen je ambities tot in de kern." delay={0.4} />
+                            Drie jaar geleden begon dit alles met een flinke dosis overmoed. Mijn vader had een website nodig en ik riep, met de grenzeloze naïviteit van een puber die dacht de hele wereld aan te kunnen: &ldquo;Ah joh, dat kan je tegenwoordig toch allang doen met AI?&rdquo; Mijn vader lachte en zei: &ldquo;Is goed, laat maar zien dan.&rdquo;
                         </p>
                         <p>
-                            <TextReveal text="Maar waar Socrates duizenden jaren geleden eindigde bij de filosofie, beginnen wij met de executie. Als designer versmelt ik klassieke esthetiek met de meedogenloze efficiëntie van moderne AI." delay={0.6} />
+                            Het pijnlijke antwoord van de realiteit: nee. AI kon dat toen nog helemaal niet.
                         </p>
-                        <p className="text-ash/60 text-lg md:text-xl">
-                            <TextReveal text="Het resultaat is geen compromis tussen mens en machine, maar een naadloze symbiose. High-end, toekomstbestendige webervaringen, geproduceerd in een fractie van de voormalige productietijd." delay={0.8} />
+                        <p>
+                            Wat een relaxed middagje werk had moeten zijn, ontaardde in een obsessie van meer dan 100 uur. Ik verloor mezelf in de duistere krochten van Elementor en WordPress, vechtend met pixels die geen millimeter wilden wijken en code die weigerde mee te werken. Pas na bloed, zweet en ontelbare frustraties stond er iets dat er &lsquo;een beetje goed&rsquo; uitzag.
+                        </p>
+                        <p>
+                            Maar in die strijd zag ik het licht. Ik begreep dat als ik dit proces kon temmen, en de opkomende kracht van AI er wél op de juiste manier in kon vlechten, ik goud in handen had. En eerlijk is eerlijk: er speelde ook een flinke portie trots mee. Want 100 verloren uren staan een overmoedige puber simpelweg niet; ik moest en zou bewijzen dat die grote mond ergens op gebaseerd was.
                         </p>
                     </div>
-                </div>
+                </section>
 
-                {/* Right Side: Data Matrix */}
-                <div className="w-full md:w-1/2 relative overflow-hidden bg-matte flex justify-center items-center">
+                {/* Section 2 */}
+                <section className="flex flex-col-reverse md:flex-row gap-12 md:gap-24 mb-32 fade-in-section items-center group">
+                    <div className="w-full md:w-1/2 space-y-6 font-drama text-lg md:text-xl text-ash/80 leading-relaxed">
+                        <h2 className="text-3xl md:text-5xl font-heading font-bold text-volt uppercase tracking-tight mb-8 md:mb-12">
+                            De mens achter de machine
+                        </h2>
+                        <p>
+                            Mijn naam is Kaya. Geloof het of niet, maar tussen alle AI-gegenereerde pixels op deze website ben ik nog gewoon een mens van vlees en bloed. Ik studeer Filosofie aan de Universiteit Leiden — vandaar de naam Socrates. Ik ben zo iemand die eigenlijk altijd al vragen stelt; niet om dwars te liggen, maar omdat ik het oprecht interessant vind om te begrijpen hoe dingen in elkaar steken en mijn eigen ideeën uit te werken.
+                        </p>
+                        <p>
+                            Diezelfde nieuwsgierigheid drijft mijn muziek. Ik rap, en in die nummers probeer ik mijn eigen gedachten een plek te geven, terwijl ik ondertussen gewoon een goede track probeer neer te zetten.
+                        </p>
 
-                    {/* Subtle image overlay */}
-                    <div
-                        className="absolute inset-0 bg-cover bg-center opacity-30 grayscale mix-blend-luminosity"
-                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2000&auto=format&fit=crop')" }}
-                    ></div>
-
-                    {/* Matrix Overlay */}
-                    <div className="absolute inset-0 z-10 opacity-70 flex gap-2 md:gap-4 overflow-hidden mask-image-linear-gradient">
-                        {matrixData.map((col, i) => (
-                            <div
-                                key={i}
-                                className="matrix-col font-data text-volt/50 text-xs md:text-sm tracking-widest writing-vertical uppercase h-[200%]"
-                                style={{
-                                    writingMode: 'vertical-rl',
-                                    textOrientation: 'mixed',
-                                    marginTop: col.marginTop,
-                                    opacity: col.opacity
-                                }}
-                            >
-                                {col.chars.map((char, j) => (
-                                    <span key={j} className="block my-2">
-                                        {char.isSocrates ? 'SOCRATES' : char.randomStr}
-                                    </span>
-                                ))}
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="relative z-20 w-48 h-48 md:w-64 md:h-64 rounded-full border border-volt/30 flex items-center justify-center p-8 backdrop-blur-sm bg-carbon/40">
-                        <div className="w-full h-full rounded-full border border-volt/50 flex flex-col items-center justify-center animate-pulse shadow-[0_0_30px_rgba(223,255,0,0.2)]">
-                            <span className="font-data text-volt tracking-widest text-xs mb-2">SYSTEEM</span>
-                            <span className="font-heading font-bold text-3xl">GEREED</span>
+                        {/* Spotify Embed Placeholder */}
+                        <div className="mt-12 rounded-2xl overflow-hidden border border-volt/20 shadow-[0_0_30px_rgba(223,255,0,0.05)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(223,255,0,0.1)] hover:border-volt/40 bg-matte/50 backdrop-blur-sm p-4">
+                            <iframe
+                                style={{ borderRadius: '12px' }}
+                                src="https://open.spotify.com/embed/track/0oinZR8DZhArcXjVjDlcj5?utm_source=generator&theme=0"
+                                width="100%"
+                                height="152"
+                                frameBorder="0"
+                                allowFullScreen=""
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                loading="lazy"
+                            ></iframe>
                         </div>
                     </div>
-                </div>
-            </section>
+                    <div className="w-full md:w-1/2 overflow-hidden rounded-2xl h-[400px] md:h-[600px] relative border border-ash/10">
+                        <img
+                            src="/images/Filosofie/Gemini_Generated_Image_2oohl82oohl82ooh.webp"
+                            alt="Abstract AI Visual 2"
+                            className="w-full h-[120%] object-cover absolute top-[-10%] parallax-img grayscale group-hover:grayscale-0 transition-all duration-700 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-carbon/20 group-hover:bg-transparent transition-all duration-700"></div>
+                    </div>
+                </section>
 
+                {/* Section 3 */}
+                <section className="flex flex-col md:flex-row gap-12 md:gap-24 fade-in-section items-center group">
+                    <div className="w-full md:w-1/2 overflow-hidden rounded-2xl h-[400px] md:h-[600px] relative border border-ash/10">
+                        <img
+                            src="/images/Filosofie/Gemini_Generated_Image_mliiqxmliiqxmlii.webp"
+                            alt="Abstract AI Visual 3"
+                            className="w-full h-[120%] object-cover absolute top-[-10%] parallax-img grayscale group-hover:grayscale-0 transition-all duration-700 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-carbon/20 group-hover:bg-transparent transition-all duration-700"></div>
+                    </div>
+                    <div className="w-full md:w-1/2 space-y-6 font-drama text-lg md:text-xl text-ash/80 leading-relaxed">
+                        <h2 className="text-3xl md:text-5xl font-heading font-bold text-white uppercase tracking-tight mb-8 md:mb-12">
+                            Omarming van de toekomst
+                        </h2>
+                        <p>
+                            De wet van de natuur is simpel: wie zich niet aanpast, sterft uit. In de wereld van tech is dat niet anders.
+                        </p>
+                        <p>
+                            Terwijl iedereen een mening heeft over AI — of het ons nu komt redden, ons komt verwoesten, of dat het slechts een hype is die overwaait — weet ik één ding zeker: AI is er, en het werkt. Ik heb AI niet alleen geaccepteerd; ik heb het volledig in mijn workflow geadopteerd.
+                        </p>
+                        <p className="text-volt/90 font-medium">
+                            Waar ik vroeger 100 uur nodig had voor middelmatigheid, zet ik nu diezelfde tijd in voor premium luxe designs en een meedogenloze efficiëntie. Ik combineer de kritische vragen uit mijn studie met de creatieve drang uit mijn muziek om designs neer te zetten die niet alleen functioneel zijn, maar die indruk maken.
+                        </p>
+                    </div>
+                </section>
+
+            </div>
         </div>
     );
 }

@@ -89,7 +89,7 @@ export default function Home() {
                         </div>
                         <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
                             <div className="hidden md:block h-[1px] w-24 bg-volt"></div>
-                            <MagneticButton as={Link} to="/contact">Project Starten</MagneticButton>
+                            <MagneticButton as={Link} to="/contact" aria-label="Gratis proefdesign aanvragen">Gratis proefdesign aanvragen</MagneticButton>
                         </div>
                     </div>
                 </div>
@@ -136,7 +136,7 @@ export default function Home() {
                         LIVE_PREVIEW_MODUS
                     </div>
                     <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter text-ash">
-                        Uitgelicht Werk <span className="text-volt">/</span> Telemetrie
+                        Uitgelicht Werk
                     </h2>
                     <p className="font-drama text-lg text-ash/50 italic mt-4 max-w-xl">
                         Interactieve live previews — scroll door de sites alsof je er bent.
@@ -158,7 +158,7 @@ export default function Home() {
 
                 {/* CTA */}
                 <div className="max-w-6xl mx-auto px-6 md:px-12 mt-24 flex justify-center">
-                    <MagneticButton as={Link} to="/werk">Bekijk Alle Projecten</MagneticButton>
+                    <MagneticButton as={Link} to="/contact" aria-label="Gratis proefdesign aanvragen">Gratis proefdesign aanvragen</MagneticButton>
                 </div>
             </section>
 
@@ -167,8 +167,8 @@ export default function Home() {
                 <h2 className="text-5xl md:text-8xl font-bold uppercase tracking-tighter mb-12">
                     Klaar voor <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-ash to-volt">Lancering?</span>
                 </h2>
-                <MagneticButton as={Link} to="/contact" className="!px-12 !py-6 text-lg">
-                    Start de Lancering
+                <MagneticButton as={Link} to="/contact" className="!px-12 !py-6 text-lg" aria-label="Gratis proefdesign aanvragen">
+                    Gratis proefdesign aanvragen
                 </MagneticButton>
             </section>
         </div>

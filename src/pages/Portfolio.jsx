@@ -78,8 +78,8 @@ export default function Portfolio() {
 
             {/* CTA */}
             <div className="max-w-6xl mx-auto mt-48 text-center">
-                <MagneticButton as={Link} to="/contact" className="!px-12 !py-6">
-                    Zelf op de Grid Staan?
+                <MagneticButton as={Link} to="/contact" className="!px-12 !py-6" aria-label="Gratis proefdesign aanvragen">
+                    Gratis proefdesign aanvragen
                 </MagneticButton>
             </div>
         </div>
