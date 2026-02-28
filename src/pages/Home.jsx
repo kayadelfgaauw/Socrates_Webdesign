@@ -113,7 +113,7 @@ export default function Home() {
                     <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold uppercase tracking-tighter leading-[1.1] mb-12">
                         <TextReveal text="Socrates stelde de juiste vragen." />
                         <span className="block text-ash/40"><TextReveal text="Wij doen hetzelfde," delay={0.2} /></span>
-                        <TextReveal text="maar gebruiken de technologie van morgen voor de antwoorden." delay={0.4} />
+                        <TextReveal text="en gebruiken de technologie van morgen voor de antwoorden." delay={0.4} />
                     </h2>
 
                     <div className="grid md:grid-cols-2 gap-8 md:gap-16 text-base md:text-xl font-drama italic text-ash/80">
