@@ -6,6 +6,8 @@ import Portfolio from './pages/Portfolio';
 import Methodology from './pages/Methodology';
 import Philosophy from './pages/Philosophy';
 import Contact from './pages/Contact';
+import AlgemeneVoorwaarden from './pages/AlgemeneVoorwaarden';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/formule" element={<Methodology />} />
           <Route path="/filosofie" element={<Philosophy />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
         </Routes>
       </Layout>
     </Router>

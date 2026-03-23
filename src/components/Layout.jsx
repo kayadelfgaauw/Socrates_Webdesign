@@ -73,8 +73,9 @@ export default function Layout({ children }) {
                 <div className="flex flex-col md:flex-row justify-between items-center text-xs font-data text-ash/50">
                     <p>&copy; {new Date().getFullYear()} Socrates Webdesign. Alle systemen operationeel.</p>
                     <div className="flex gap-4 mt-4 md:mt-0">
-                        <span>SYSTEEM_GEREED</span>
-                        <span className="text-volt">IDLE: NEE</span>
+                        <Link to="/algemene-voorwaarden" className="hover:text-volt transition-colors">Algemene Voorwaarden</Link>
+                        <span className="text-ash/20">|</span>
+                        <Link to="/privacy" className="hover:text-volt transition-colors">Privacy & Cookies</Link>
                     </div>
                 </div>
             </footer>
